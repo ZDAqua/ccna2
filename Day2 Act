@@ -1,0 +1,109 @@
+For AccentureCamSur
+@C1:
+config t
+vlan 3
+name acccamsur.com
+exit
+Interface vlan 3
+ desc acccamsur.com
+ no shut
+ ip add 10.0.1.1 255.255.255.0
+exit
+ip dhcp excluded-add 10.0.1.1 10.0.1.20
+ip dhcp pool acccamsur
+ network 10.0.1.0 255.255.255.0
+domain-name acccamsur.com
+dns-server 8.8.8.8
+ default-router 10.0.1.1
+end
+
+@A1:
+config t
+int e0/0
+switchport mode access
+switchport access vlan 3
+end
+sh vlan br
+
+@p1:
+CONFIG T
+INT E0/0
+no ip address dhcp
+ip address dhcp
+no shut
+do bp
+
+
+
+For accenturebsp.com
+@C1:
+config t
+vlan 4
+name accenturebsp.com
+exit
+Interface vlan 4
+ desc accenturebsp.com
+ no shut
+ ip add 10.0.0.32 255.255.255.224
+exit
+ip dhcp excluded-add 10.0.0.33 10.0.0.35
+ip dhcp pool accenturebsp
+ network 10.0.0.32 255.255.255.224
+domain-name accenturebsp.com
+dns-server 8.8.8.8
+ default-router 10.0.0.33
+end
+
+@A2:
+config t
+int e1/0
+switchport mode access
+switchport access vlan 4
+end
+sh vlan br
+
+@p2:
+config t
+int e1/0
+no ip address dhcp
+ip address dhcp
+no shut
+do bp
+
+
+
+
+For accentSG.com
+@C1:
+config t
+vlan 13
+name accentSG.com
+exit
+Interface vlan 13
+ desc accentSG.com
+ no shut
+ ip add 10.0.4.1 255.255.252.0
+exit
+ip dhcp excluded-add 10.0.4.1 10.0.4.100
+ip dhcp pool accentSG.com
+ network 10.0.4.0 255.255.252.0
+domain-name accentSG.com
+dns-server 8.8.8.8
+ default-router 10.0.4.1
+end
+
+@C2:
+config t
+int e1/0
+switchport mode access
+switchport access vlan 13
+end
+sh vlan br
+
+@S2:
+config t
+int e1/0
+no ip address dhcp
+ip address dhcp
+no shut
+do bp
