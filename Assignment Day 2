@@ -1,0 +1,34 @@
+For Comelec
+@D1:
+config t
+vlan 11
+name acccamsur.com
+exit
+Interface vlan 11
+ desc acccamsur.com
+ no shut
+ ip add 10.0.1.1 255.255.255.0
+exit
+ip dhcp excluded-add 10.0.1.1 10.0.1.20
+ip dhcp pool acccamsur
+ network 10.0.1.0 255.255.255.0
+domain-name acccamsur.com
+dns-server 8.8.8.8
+ default-router 10.0.1.1
+end
+
+@A1:
+config t
+int e0/0
+switchport mode access
+switchport access vlan 11
+end
+sh vlan br
+
+@p1:
+config t
+int e0/0
+no ip address dhcp
+ip address dhcp
+no shut
+do bp
