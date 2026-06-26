@@ -25,7 +25,7 @@ switchport access vlan 11
 end
 sh vlan br
 
-@p1:
+@P1:
 config t
 int e0/0
 no ip address dhcp
@@ -38,32 +38,68 @@ For ARMY
 @D1:
 config t
 vlan 12
-name COMELEC.gov.ph
+name ARMY.mil.ph
 exit
 Interface vlan 12
- desc COMELEC.gov.ph
+ desc ARMY.mil.ph
  no shut
- ip add 10.0.2.1 255.255.254.0
+ ip add 10.0.32.1 255.255.224.0
 exit
-ip dhcp excluded-add 10.0.2.1 10.0.2.50
-ip dhcp pool COMELEC.gov.ph
- network 10.0.2.0 255.255.254.0
-domain-name COMELEC.gov.ph
+ip dhcp excluded-add 10.0.32.1 10.0.32.100
+ip dhcp pool ARMY.mil.ph
+ network 10.0.32.0 255.255.224.0
+domain-name ARMY.mil.ph
 dns-server 8.8.8.8
- default-router 10.0.2.1
+ default-router 10.0.32.1
 end
 
-@A1:
+@A2:
 config t
-int e0/0
+int e1/0
 switchport mode access
 switchport access vlan 12
 end
 sh vlan br
 
-@p1:
+@P2:
 config t
-int e0/0
+int e1/0
+no ip address dhcp
+ip address dhcp
+no shut
+do bp
+
+
+For DPWH
+@D1:
+config t
+vlan 13
+name DPWH.gov.ph
+exit
+Interface vlan 13
+ desc DPWH.gov.ph
+ no shut
+ ip add 10.0.64.1 255.255.192.0
+exit
+ip dhcp excluded-add 10.0.64.1 10.0.64.100
+ip dhcp pool DPWH.gov.ph
+ network 10.0.64.0 255.255.192.0
+domain-name DPWH.gov.ph
+dns-server 8.8.8.8
+ default-router 10.0.64.1
+end
+
+@D2:
+config t
+int e1/0
+switchport mode access
+switchport access vlan 13
+end
+sh vlan br
+
+@S2:
+config t
+int e1/0
 no ip address dhcp
 ip address dhcp
 no shut
