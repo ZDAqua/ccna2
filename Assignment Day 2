@@ -1,20 +1,20 @@
-For Comelec
+For COMELEC
 @D1:
 config t
 vlan 11
-name acccamsur.com
+name COMELEC.gov.ph
 exit
 Interface vlan 11
- desc acccamsur.com
+ desc COMELEC.gov.ph
  no shut
- ip add 10.0.1.1 255.255.255.0
+ ip add 10.0.2.1 255.255.254.0
 exit
-ip dhcp excluded-add 10.0.1.1 10.0.1.20
-ip dhcp pool acccamsur
- network 10.0.1.0 255.255.255.0
-domain-name acccamsur.com
+ip dhcp excluded-add 10.0.2.1 10.0.2.50
+ip dhcp pool COMELEC.gov.ph
+ network 10.0.2.0 255.255.254.0
+domain-name COMELEC.gov.ph
 dns-server 8.8.8.8
- default-router 10.0.1.1
+ default-router 10.0.2.1
 end
 
 @A1:
@@ -22,6 +22,42 @@ config t
 int e0/0
 switchport mode access
 switchport access vlan 11
+end
+sh vlan br
+
+@p1:
+config t
+int e0/0
+no ip address dhcp
+ip address dhcp
+no shut
+do bp
+
+
+For ARMY
+@D1:
+config t
+vlan 12
+name COMELEC.gov.ph
+exit
+Interface vlan 12
+ desc COMELEC.gov.ph
+ no shut
+ ip add 10.0.2.1 255.255.254.0
+exit
+ip dhcp excluded-add 10.0.2.1 10.0.2.50
+ip dhcp pool COMELEC.gov.ph
+ network 10.0.2.0 255.255.254.0
+domain-name COMELEC.gov.ph
+dns-server 8.8.8.8
+ default-router 10.0.2.1
+end
+
+@A1:
+config t
+int e0/0
+switchport mode access
+switchport access vlan 12
 end
 sh vlan br
 
