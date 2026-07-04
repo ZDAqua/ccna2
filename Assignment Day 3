@@ -72,6 +72,7 @@ conf t
 ip route 0.0.0.0 0.0.0.0 192.168.1.129
 end
 
+Assignment Day 3 - Part 1
 S2
 conf t
 ip route 0.0.0.0 0.0.0.0 10.2.2.2
@@ -83,11 +84,13 @@ ip route 0.0.0.0 0.0.0.0 10.2.1.2 1
 ip route 0.0.0.0 0.0.0.0 10.2.1.1 10
 end
 
+~
+
 D1
 conf t
 router eigrp 100
-network 10.2.1.0 0.0.0.225
-network 10.2.2.0 0.0.0.225
+network 10.2.1.0 0.0.0.255
+network 10.2.2.0 0.0.0.255
 network 192.168.1.128 0.0.0.31
 network 10.1.4.4 0.0.0.3
 end
@@ -95,8 +98,8 @@ end
 D2
 conf t
 router eigrp 100
-network 10.2.1.0 0.0.0.225
-network 10.2.2.0 0.0.0.225
+network 10.2.1.0 0.0.0.255
+network 10.2.2.0 0.0.0.255
 network 192.168.1.128 0.0.0.31
 network 10.1.4.8 0.0.0.3
 end
