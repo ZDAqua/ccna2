@@ -318,10 +318,10 @@ BlueTeam: UTM: unified Threat management:
 4. IntrusionDetection/IntrusionPrevention
 5  Network Admissions Control.
 Top 5 UTM: 1.FortinetFortigate: syet
-           1.1: Palo Alto:superSuplado
-           2. Checkpoint
-           3.4 Cisco/Fortinet
-           4. sophos/Mahirap Ka.
+           1.1: Palo Alto:SuperSuplado: %M Budget
+           2. Checkpoint: Gurami pang matanda
+           3.4 Cisco/Fortinet: Kupal
+           4. sophos/Dating Mura, Now Super Mahal
 
 Firewall Profile no.1: use ExtendedACL vs NamedExtendedAcl:
 ex.1: you are the Blue Team/SOC guys for pogo sites:
