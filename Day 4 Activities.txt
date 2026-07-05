@@ -1,0 +1,105 @@
+config t
+NO ip access-list standard NOISKUL
+ip access-list standard NOISKUL
+DENY   192.169.173.0 0.0.255.255
+DENY   __.__.__.__   0.0.255.255
+DENY   __.__.__.__   0.0.255.255
+DENY   __.__.__.__   0.0.255.255
+DENY   __.__.__.__   0.0.255.255
+Permit Any
+Int Gi 1
+ ip access-group NOISKUL in
+end
+
+config t
+NO ip access-list standard NOTORS
+ip access-list standard NOTORS
+DENY   162.159.0.0 0.0.255.255
+DENY   104.21.0.0 0.0.255.255
+DENY   172.67.0.0 0.0.255.255
+DENY   84.32.0.0 0.0.255.255
+DENY   76.223.0.0 0.0.255.255
+DENY   13.248.0.0 0.0.255.255
+DENY   104.26.0.0 0.0.255.255
+DENY   95.211.0.0 0.0.255.255
+Permit Any
+Int Gi 1
+ ip access-group NOTORS in
+end
+
+yum install -y nano
+yum install -y nginx
+
+cmd
+nmap -v 192.168.103.11
+
+protocol  hacker/source  victim/destination  port
+
+config t
+no ip access-list extended FWP2
+ip access-list extended FWP2
+permit tcp any host bet10.com eq 2000
+permit tcp any host bet10.com eq 5060
+permit tcp any host bet10.com eq 5061
+permit tcp any host bet11.com eq 53
+permit tcp any host bet11.com eq 80
+permit tcp any host bet11.com eq 443
+int gi 3
+ip access-group FWP2 in
+do sh ip access-list
+no ip access-group FWP2 in
+
+config t
+no ip access-list extended FWP3
+ip access-list extended FWP3
+permit tcp any host bet10.com eq 53
+permit tcp any host bet10.com eq 22
+permit tcp any host bet10.com eq 80
+permit tcp any host bet10.com eq 2000
+permit tcp any host bet11.com eq 80
+permit tcp any host bet11.com eq 443
+permit tcp any host bet11.com eq 5060
+int gi 3
+ip access-group FWP3 in
+do sh ip access-list
+
+
+config t
+no access-list 8
+access-list 8 permit host 192.168.103.10
+access-list 8 permit host 192.168.103.11
+ip host betlog.com 208.8.8.69
+Int Gi 3
+ ip nat Inside
+Int gi 1
+ ip nat Outside
+IP Nat inside source static tcp 192.168.103.10 80 208.8.8.69 80
+IP Nat inside source static tcp 192.168.103.10 443 208.8.8.69 443
+IP Nat inside source static tcp 192.168.103.11 80 208.8.8.69 8080
+IP Nat inside source static tcp 192.168.103.11 443 208.8.8.69 8443
+IP nat inside source list 8 int gi 1 Overload
+end
+show ip nat translation
+
+CCNA SECURITY LAB #: Configuring public key and ssh:
+S1: Generate a publickey: keykeymo
+
+config t
+ip domain name keykeymo
+crypto key generate rsa modulus 1024
+
+config t
+ip ssh version 2
+end
+
+sh ip ssh
+
+---- BEGIN SSH2 PUBLIC KEY ----
+AAAAB3NzaC1yc2EAAAADAQABAAABAQCovINJ2KA1vnjlsj8NP/RPgiU+0eYb66A7
+EteFBnvK7tkxKdLY2Zs9lOSS1jno4b/0tZ0j3fYnYEn+iGwlLqqU927InsilYRWE
+k6oEaiArmf+pIz3PESvpS5Hn2zCyIoSaNCYP05+FvT1Dt6yvRPovYntDmGV4A8N0
+bMrJ1QbIO/4dNiI6OyfXICFovaMh8ww36TH0uEErCMgQsts3KCXCP73Qnh9tNr58
+nIn7DQ2J/Hf5+H/dTNZNRQOyxh46GB+Hon1q93yc4/Kbq6zdvzUkaPUaqho/0F4i
+jbJK4jt2Hb6brKN5EJoNTctia4HfWIVZgClaSnLHZO7lEMAAkj2J
+---- END SSH2 PUBLIC KEY ----
+
